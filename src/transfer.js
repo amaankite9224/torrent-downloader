@@ -11,11 +11,11 @@ const walk = async (dir, extentions) => {
     if (stat && stat.isDirectory()) {
       walk(filepath, extentions);
     } else {
-      const extention = file.split(".").pop();
-      if (extentions.split(",").includes(extention)) {
+      const extension = file.split(".").pop();
+      if (extentions.split(",").includes(extension)) {
         console.log("Uploading File: ", filepath);
         const filename =
-          filepath.replace(/[^a-zA-Z0-9]/g, "_").replace(extension, "") + "." + extention;
+          filepath.replace(/[^a-zA-Z0-9]/g, "_").replace(extension, "") + "." + extension;
         await execAsync(
           `curl --upload-file "${filepath}" https://transfer.sh/${filename}`
         );
