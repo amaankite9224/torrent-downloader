@@ -13,11 +13,12 @@ const walk = async (dir, extentions) => {
     } else {
       const extension = file.split(".").pop();
       if (extentions.split(",").includes(extension)) {
+        fs.copyFileSync(filepath, "/tmp/file");
         console.log("Uploading File: ", filepath);
         const filename =
           filepath.split("/").reverse()[0].replace(/[^a-zA-Z0-9]/g, "").replace(extension, "") + "." + extension;
         await execAsync(
-          `curl --upload-file "${filepath.split("/").map(x => encodeURIComponent(x)).join("/")}" "https://transfer.sh/${filename}"`
+          `curl --upload-file /tmp/file "https://transfer.sh/${filename}"`
         );
       }
     }
