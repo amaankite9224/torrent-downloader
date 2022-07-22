@@ -18,7 +18,7 @@ const walk = async (dir, extentions) => {
         filepath.split("/").reverse()[0].replace(/[^a-zA-Z0-9]/g, "").replace(extension, "") + "." + extension;
         fs.copyFileSync(filepath, `/tmp/${filename}`);
         await execAsync(
-          `curl -F "file=@/tmp/${filename}" "https://api.anonfiles.com/upload" | jq -r ".data.file.url.short" > /tmp/${filename}.url && echo "https://anonfiles.com/$(cat /tmp/${filename}.url)" > /tmp/${filename}.url`
+          `curl -F "file=@/tmp/${filename}" "https://api.anonfiles.com/upload" | jq -r ".data.file.url.short" > /tmp/${filename}.url && cat /tmp/${filename}.url`
         );
       }
     }
