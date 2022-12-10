@@ -15,6 +15,5 @@ RUN apk add --no-cache transmission-cli mosquitto-clients jq \
     openssh tree sshpass rsync zip curl &&\
     mkdir /data && mkdir -p /root/.ssh &&\
     ssh-keygen -b 2048 -t rsa -f /tmp/sshkey -q -N "" &&\
-    ssh-keyscan -H captain-nemo.xyz >> ~/.ssh/known_hosts &&\
     chmod +x /usr/bin/transfer /usr/bin/compress
 CMD [ "mosquitto -c /etc/mosquitto/mosquitto.conf" ]
