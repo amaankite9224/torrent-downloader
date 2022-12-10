@@ -6,11 +6,13 @@ COPY src /app/src
 RUN npm install --production && npm run build
 
 
+
 FROM alpine
 
 WORKDIR /app
 COPY scripts/* /usr/bin/
 COPY --from=builder /app/main /usr/bin/torrent
+RUN npm install webtorrent -g
 RUN apk add --no-cache transmission-cli mosquitto-clients jq \
     openssh tree sshpass rsync zip curl &&\
     mkdir /data && mkdir -p /root/.ssh &&\
